@@ -1,0 +1,48 @@
+<p class="form">基本情報</p>
+
+<table class="show">
+  <%- if Core.user.root? -%>
+  <tr>
+    <th><%=t 'activerecord.models.cms/site' %></th>
+    <td><%= @item.sites.map(&:name).join('，') %></td>
+  </tr>
+  <%- end -%>
+  <tr>
+    <th><%= @item.locale(:state) %></th>
+    <td><%= @item.status.name %></td>
+  </tr><tr>
+    <th><%= @item.locale(:code) %></th>
+    <td><%= @item.code %></td>
+  </tr><tr>
+    <th><%= @item.locale(:name) %></th>
+    <td><%= @item.name %></td>
+  </tr><tr>
+    <th><%= @item.locale(:name_en) %></th>
+    <td><%= @item.name_en %></td>
+  </tr><tr>
+    <th><%= @item.locale(:sort_no) %></th>
+    <td><%= @item.sort_no %></td>
+  </tr>
+</table>
+
+<br /><p class="form">グループ設定</p>
+
+<table class="show">
+  <tr>
+    <th><%= @item.locale(:address) %></th>
+    <td><%= @item.address %></td>
+  </tr> <tr>
+    <th><%= @item.locale(:tel) %></th>
+    <td><%= @item.tel %>
+        <%= @item.tel_attend %></td>
+  </tr> <tr>
+    <th><%= @item.locale(:fax) %></th>
+    <td><%= @item.fax %></td>
+  </tr><tr>
+    <th><%= @item.locale(:email) %></th>
+    <td><%= @item.email %></td>
+  </tr><tr>
+    <th><%= @item.locale(:note) %></th>
+    <td><%= @item.note %></td>
+  </tr>
+</table>

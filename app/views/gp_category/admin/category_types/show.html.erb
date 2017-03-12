@@ -1,0 +1,49 @@
+<p class="form">基本情報</p>
+
+<table class="show">
+  <tr>
+    <th><%= @item.class.human_attribute_name :state %></th>
+    <td><%= @item.status.try(:name) %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :name %></th>
+    <td><%= @item.name %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :title %></th>
+    <td><%= @item.title %></td>
+  </tr>
+  <tr>
+    <th><%= @item.locale(:description) %></th>
+    <td><%= @item.description %></td>
+  </tr>
+  <tr>
+    <th><%= @item.locale(:sitemap_state) %></th>
+    <td><%= @item.class::SITEMAP_STATE_OPTIONS.detect{|o| o.last == @item.sitemap_state }.try(:first) %></td>
+  </tr>
+  <tr>
+    <th><%= @item.locale(:docs_order) %></th>
+    <td><%= @item.class::DOCS_ORDER_OPTIONS.detect{|o| o.last == @item.docs_order }.try(:first) %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :sort_no %></th>
+    <td><%= @item.sort_no %></td>
+  </tr>
+</table>
+
+<p class="form">ページ設定</p>
+
+<table class="show">
+  <%= concept_view @item, :container => :tr %>
+  <%= layout_view @item, :container => :tr %>
+  <tr>
+    <th><%= @item.class.human_attribute_name :template_id %></th>
+    <td><%= @item.template.try(:title) %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :internal_category_type_id %></th>
+    <td><%= @item.internal_category_type.try(:title) %></td>
+  </tr>
+</table>
+
+<%= creator_view @item %>

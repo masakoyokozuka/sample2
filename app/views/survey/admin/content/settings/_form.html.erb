@@ -1,0 +1,25 @@
+<%= render 'shared/admin/content/settings/form', f: f, item: @item -%>
+
+<%- if @item.name == 'approval_relation' -%>
+<table class="show">
+  <tr>
+    <th><%= Approval::Content::ApprovalFlow.model_name.human %></th>
+    <td><%= select_tag 'item[extra_values][approval_content_id]',
+                       options_from_collection_for_select(Approval::Content::ApprovalFlow.all, :id, :name, @item.extra_values[:approval_content_id]),
+                       include_blank: true %></td>
+  </tr>
+</table>
+<%- end -%>
+
+<%- if @item.name == 'auto_reply' -%>
+<table class="show">
+  <tr>
+    <th>自動返信テキスト（上部）</th>
+    <td><%= text_area_tag 'item[extra_values][upper_reply_text]', @item.extra_values[:upper_reply_text], size: '100x10' %></td>
+  </tr>
+  <tr>
+    <th>自動返信テキスト（下部）</th>
+    <td><%= text_area_tag 'item[extra_values][lower_reply_text]', @item.extra_values[:lower_reply_text], size: '100x10' %></td>
+  </tr>
+</table>
+<%- end -%>

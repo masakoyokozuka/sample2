@@ -1,0 +1,5 @@
+<%- unless @top_categories.empty? -%>
+<ul class="categories">
+  <%= render 'categories', categories: @top_categories.to_a %>
+</ul>
+<%- end -%>

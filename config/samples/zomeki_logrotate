@@ -1,0 +1,10 @@
+/var/www/zomeki/log/*.log {
+  compress
+  daily
+  dateext
+  delaycompress
+  missingok
+  notifempty
+  rotate 7
+  }
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title><%= Core.title %></title>
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/_common/favicon.ico" />
+  <link rel="icon" type="image/vnd.microsoft.icon" href="/_common/favicon.ico" />
+  <!--[if lt IE 9]><script src="/_common/js/html5.js"></script><![endif]-->
+  <%= javascript_include_tag '/_common/js/jquery.min.js' %>
+  <%= javascript_include_tag '/_common/js/jquery-migrate.min.js' %>
+  <%= javascript_include_tag '/_common/js/jquery_ujs.js' %>
+
+  <%= stylesheet_link_tag '/_common/themes/admin/style.css' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="simpleContainer">
+    <%= render 'layouts/admin/notice' %>
+    <%= yield  %>
+  </div>
+</body>
+</html>

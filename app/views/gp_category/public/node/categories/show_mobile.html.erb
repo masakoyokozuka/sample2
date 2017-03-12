@@ -1,0 +1,17 @@
+<div class="contentGpCategory contentGpCategoryCategory">
+  <%- unless @category.public_children.empty? -%>
+    <div class="h2"><%= @category.title %></div>
+    <%- @category.public_children.each do |category| -%>
+    <div class="category<%= category.name.try(:camelize) %>">・<%= link_to category.title, category.public_uri %></div>
+    <%- end -%>
+  <%- end -%>
+
+  <%- unless @docs.empty? -%>
+    <div class="h2">記事一覧</div>
+    <%- @docs.each do |doc| -%>
+    <div class="doc">・<%= doc_replace(doc, @content.list_style, @content.date_style, @content.time_style) %></div>
+    <%- end -%>
+  <%- end -%>
+
+  <%= paginate @docs %>
+</div>

@@ -1,0 +1,14 @@
+<div class="contentOrganization contentOrganizationGroups">
+  <%- @groups.each do |group| -%>
+  <section class="<%= group.name %>">
+    <h2 id="<%= group.sys_group_code %>"><%= group_replace(group, @content.list_style) %></h2>
+    <%- unless group.public_children.empty? -%>
+    <ul>
+      <%- group.public_children.each do |child| -%>
+      <%= group_li(child, @content.list_style) %>
+      <%- end -%>
+    </ul>
+    <%- end -%>
+  </section>
+  <%- end -%>
+</div>

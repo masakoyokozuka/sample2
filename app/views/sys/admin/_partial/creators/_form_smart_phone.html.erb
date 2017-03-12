@@ -1,0 +1,43 @@
+<%
+return unless Core.user.has_auth?(:manager)
+
+groups = Core.site.groups_for_option
+users = Core.site.users_for_option
+
+# for root user
+out_of_site = !Core.user.sites.include?(Core.site)
+if out_of_site
+  root_user = Sys::User.root
+  root_group = root_user.groups.first
+  groups += [[root_group.name, root_group.id]]
+  users += [[root_user.name_with_account, root_user.id]]
+end
+
+if item.creator.blank?
+  if Core.user.root? && out_of_site
+    item.build_creator(
+      group_id: groups.first.try!(:last),
+      user_id: Core.user.id
+    )
+  else
+    item.build_creator(
+      group_id: Core.user_group.id,
+      user_id: Core.user.id
+    )
+  end
+end
+
+%><br />
+
+<p class="managerForm">作成者</p>
+
+<%= f.fields_for :creator do |f2| %>
+<div class="onlyManager">
+  <div class="label1">グループ</div>
+  <%= f2.select :group_id, groups, include_blank: true %>
+</div>
+<div class="onlyManager">
+  <div class="label1">ユーザー</div>
+  <%= f2.select :user_id, users, include_blank: true %>
+</div>
+<%- end -%>

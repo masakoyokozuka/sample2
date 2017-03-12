@@ -1,0 +1,32 @@
+<%= render 'shared/admin/piece/form', f: f do -%>
+<p class="form">詳細設定</p>
+
+<table class="show">
+  <tr>
+    <th><%= f.label :target_form_id %></th>
+    <td><%= f.array_select 'in_settings[target_form_id]',
+                           @item.content.public_forms.map{|f| ["#{f.title}（#{f.name}）", f.id] }, include_blank: true %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :head_css %></th>
+    <td><%= f.array_text_area 'in_settings[head_css]', rows: 4 %></td>
+  </tr>
+</table>
+
+<p class="form">挿入テキスト</p>
+
+<table class="show">
+  <tr>
+    <th><%= f.label :upper_text %></th>
+  </tr>
+  <tr>
+    <td><%= f.array_text_area 'in_settings[upper_text]', class: 'body' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :lower_text %></th>
+  </tr>
+  <tr>
+    <td><%= f.array_text_area 'in_settings[lower_text]', class: 'body' %></td>
+  </tr>
+</table>
+<%- end -%>

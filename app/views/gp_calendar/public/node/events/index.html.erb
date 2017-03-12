@@ -1,0 +1,24 @@
+<div class="calendarEvents calendarMonthlyEvents">
+  <h2><%= @date.year %>年<%= "#{@date.month}月" unless @year_only %></h2>
+
+  <%= render 'gp_calendar/public/node/shared/pagination', extra_css: 'upperPagination' %>
+
+  <%- unless @events.empty? -%>
+  <table border="1">
+    <thead>
+      <tr>
+      <%- @content.list_style.each do |header| -%>
+        <th><%= header[:header].html_safe %></th>
+      <%- end -%>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @events.each do |event| -%>
+        <%= event_table_replace(event, @content.list_style) %>
+      <%- end -%>
+    </tbody>
+  </table>
+  <%- end -%>
+
+  <%= render 'gp_calendar/public/node/shared/pagination', extra_css: 'lowerPagination' %>
+<!-- end .calendarEvents --></div>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title><%= Core.title %></title>
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/_common/favicon.ico" />
+  <link rel="icon" type="image/vnd.microsoft.icon" href="/_common/favicon.ico" />
+  <!--[if lt IE 9]><script src="/_common/js/html5.js"></script><![endif]-->
+  <%= javascript_include_tag '/_common/js/jquery.min.js' %>
+  <%= javascript_include_tag '/_common/js/jquery-migrate.min.js' %>
+  <%= javascript_include_tag '/_common/js/jquery_ujs.js' %>
+
+  <%= stylesheet_link_tag '/_common/css/jquery-ui-themes/smoothness/jquery-ui.min.css' %>
+  <%= javascript_include_tag '/_common/js/jquery-ui.min.js' %>
+  <%= stylesheet_link_tag '/_common/css/jquery-ui-timepicker-addon.css' %>
+  <%= javascript_include_tag '/_common/js/jquery-ui-timepicker-addon.js' %>
+
+  <%= stylesheet_link_tag '/_common/themes/admin/style.css' %>
+  <%= javascript_include_tag '/_common/js/cms_admin/cms.js' %>
+  <%= javascript_include_tag '/_common/js/cms_admin/form.js' %>
+  <%= javascript_include_tag '/_common/js/cms_admin/navi.js' %>
+
+  <%= stylesheet_link_tag '/_common/css/simple_tabs.css' %>
+  <%= javascript_include_tag '/_common/js/simple_tabs.js' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+      <div id="headerContainer">
+        <h1><a href="/<%= ZomekiCMS::ADMIN_URL_PREFIX %>">CMS</a></h1>
+        <div class="menu">
+          <span class="loginGroup"><%= Core.user_group.try!(:name) %></span>
+          <span class="loginUser"><%= Core.user.try!(:name_with_account) %></span>
+          <a class="web" href="<%= Core.site.full_uri %>" target="_blank">公開画面</a>
+          <a class="logout" href="/<%= ZomekiCMS::ADMIN_URL_PREFIX %>/logout">ログアウト</a>
+        </div>
+      <!-- /#headerContainer --></div>
+    <!-- /#header --></header>
+    <nav id="navi">
+      <div id="naviContainer">
+        <ul class="selector">
+          <li><%= link_to Core.site.try!(:name), main_app.cms_navi_sites_path, :id => "currentNaviSite" %></li>
+          <li><%= link_to Core.concept.try!(:name), main_app.cms_navi_concepts_path, :id => "currentNaviConcept" %></li>
+        </ul>
+        <%- if lookup_context.exists?('header', controller.controller_path, true) -%>
+        <%= render controller.controller_path + '/header' %>
+        <%- end -%>
+      <!-- /#naviContainer --></div>
+    <!-- /#navi --></nav>
+    <div id="main">
+      <div id="content">
+        <div id="contentContainer">
+          <div id="contentHeader">
+            <%- if lookup_context.exists?('menu', controller.controller_path, true) -%>
+            <%= render controller.controller_path + '/menu' %>
+            <%- end -%>
+          </div>
+          <div id="contentBody">
+            <%= render 'layouts/admin/notice' %>
+            <%= yield %>
+          </div>
+          <div id="contentFooter"></div>
+        <!-- /#contentContainer --></div>
+      <!-- /#content --></div>
+    <!-- /#main --></div>
+    <footer id="footer">
+      <div id="footerContainer">
+        <%#= :footer %>
+      <!-- /#footerContainer --></div>
+    <!-- /#footer --></footer>
+  <!-- /#container --></div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<p class="form">デザイン</p>
+
+<%= form_for :item do |f| %>
+
+<%= error_messages_for :item %>
+
+<table class="show" >
+  <tr>
+    <th>対象コンセプト</th>
+    <td><%= f.select :concept_id, Core.site.public_concepts_for_option, include_blank: "　" %></td>
+  </tr><tr>
+    <th>コンポーネント</th>
+    <td>
+      <input type="checkbox" name="item[target][layout]" checked="checked" /> レイアウト<br />
+      <input type="checkbox" name="item[target][piece]" checked="checked" /> ピース<br />
+    </td>
+  </tr>
+</table>
+
+<div class="submitters">
+  <input type="submit" value="エクスポート" />
+</div>
+
+<% end %>

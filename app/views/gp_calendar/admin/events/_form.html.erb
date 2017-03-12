@@ -1,0 +1,94 @@
+<span class="note">※は必須項目です。</span>
+
+<table class="show">
+  <tr>
+    <th><%= f.label :state %></th>
+    <td colspan="2"><%= f.radio_buttons :state, @item.class::STATE_OPTIONS, :class => 'status' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :started_on %> <span class="note">※</span></th>
+    <td colspan="2"><%= f.text_field :started_on, :value => value_for_datepicker(f.object_name, :started_on),
+                                                  :style => 'width: 150px;', :class => 'datepicker' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :ended_on %> <span class="note">※</span></th>
+    <td colspan="2"><%= f.text_field :ended_on, :value => value_for_datepicker(f.object_name, :ended_on),
+                                                :style => 'width: 150px;', :class => 'datepicker' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :title %> <span class="note">※</span></th>
+    <td colspan="2"><%= f.text_field :title, :style => 'width: 700px;' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :href %></th>
+    <td><%= f.text_field :href, :style => 'width: 500px;' %></td>
+    <td><%= f.radio_buttons :target, @item.class::TARGET_OPTIONS %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :description %></th>
+    <td colspan="2"><%= f.text_area :description, :size => '100x3', :style => 'width: 700px;' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :note %></th>
+    <td colspan="2"><%= f.text_area :note, :size => '100x3', :style => 'width: 700px;' %></td>
+  </tr>
+</table>
+
+<%- if @content.category_types.present? -%>
+<%= render 'gp_category/admin/_partial/categories/form', f: f, item: @item, category_types: @content.category_types %>
+<%- end -%>
+
+<%= render 'sys/admin/_partial/files/form', f: f, item: @item, content: @content %>
+
+<%- if @content.event_sync_import? -%>
+<p class="form">同期元情報</p>
+
+<table class="show">
+  <tr>
+    <th><%= @item.class.human_attribute_name :sync_source_host %></th>
+    <td><%= @item.sync_source_host %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :sync_source_content_id %></th>
+    <td><%= @item.sync_source_content_id %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :sync_source_id %></th>
+    <td><%= @item.sync_source_id %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :sync_source_source_class %></th>
+    <td><%= @item.sync_source_source_class.constantize.model_name.human rescue nil %></td>
+  </tr>
+</table>
+<%- end -%>
+
+<%- if @content.event_sync_export? -%>
+<p class="form">カレンダー同期</p>
+
+<table class="show">
+  <tr>
+    <th><%= f.label :will_sync %></th>
+    <td colspan="2"><%= f.radio_buttons :will_sync, @item.class::WILL_SYNC_OPTIONS %></td>
+  </tr>
+</table>
+<%- end -%>
+
+<%= creator_form f %>
+
+<%= javascript_tag do -%>
+<%= toggle_form_function %>
+
+function set_copy_date(from, to) {
+  $(from).on('change', function () {
+    if ($(to).val() === '') { $(to).val($(from).val()); }
+  });
+}
+
+$(document).ready(function () {
+  <%= enable_datepicker_script %>
+
+  set_copy_date('#item_started_on', '#item_ended_on');
+  set_copy_date('#item_ended_on', '#item_started_on');
+});
+<%- end -%>

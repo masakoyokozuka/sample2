@@ -1,0 +1,19 @@
+<div class="navi">
+<%- if @parent -%>
+  <%- ancestors = @parent.ancestors; ancestors.each_with_index do |c, k| -%>
+  <%= link_to h(c.name), sys_groups_path(c) %>
+  <% if ancestors.size != k + 1 %><span class="separator">&gt;</span><% end %>
+  <%- end -%>
+<%- else -%>
+  グループ
+<%- end -%>
+</div>
+
+<div class="actionMenu">
+<%= action_menu :new, ['新規グループ', new_sys_group_path] %>
+<%= action_menu :new, ['新規ユーザー', new_sys_group_user_path] %>
+<%= action_menu :index %>
+<%= action_menu :show %>
+<%= action_menu :edit    if safe{@item.editable?} %>
+<%= action_menu :destroy if safe{@item.deletable?} %>
+</div>

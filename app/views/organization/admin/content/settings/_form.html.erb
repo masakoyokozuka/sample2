@@ -1,0 +1,52 @@
+<%= render 'shared/admin/content/settings/form', f: f, item: @item -%>
+
+<%= render 'gp_article/admin/shared/doc_style_tags' %>
+<%= javascript_tag do %>
+$(function() {
+  $('a.show_dialog').on('click', function() {
+    $('#doc_style_tags').dialog({width: 400});
+    return false;
+  });
+});
+<%- end -%>
+
+<%- if @item.name == 'article_relation' -%>
+<table class="show">
+  <tr>
+    <th>記事コンテンツ</th>
+    <td><%= select_tag 'item[extra_values][gp_article_content_doc_id]',
+                       options_from_collection_for_select(GpArticle::Content::Doc.where(site_id: Page.site.id), :id, :name,
+                                                          @item.extra_values[:gp_article_content_doc_id]), include_blank: true %></td>
+  </tr>
+</table>
+<%- end -%>
+
+<%- if @item.name == 'feed' -%>
+<table class="show">
+  <tr>
+    <th>表示件数</th>
+    <td>
+      <%= text_field_tag 'item[extra_values][feed_docs_number]', @item.extra_values[:feed_docs_number], class: 'number' %>
+    </td>
+  </tr>
+  <tr>
+    <th>表示期間（当日含む）</th>
+    <td>
+      <%= text_field_tag 'item[extra_values][feed_docs_period]', @item.extra_values[:feed_docs_period], class: 'number' %>
+      （例 公開日時が1週間以内の場合、入力は7　※当日含む）
+    </td>
+  </tr>
+</table>
+<%- end -%>
+
+<%- if @item.name == 'list_style' -%>
+<%= render 'organization/admin/shared/group_list_style_tags' %>
+<%= javascript_tag do %>
+$(function() {
+  $('a.show_group_list_style_dialog').on('click', function() {
+    $('#group_list_style_tags').dialog({width: 400});
+    return false;
+  });
+});
+<%- end -%>
+<%- end -%>

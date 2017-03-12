@@ -1,0 +1,33 @@
+<% if defined?(container) && container != :tr %>
+<table class="show">
+<% end %>
+  <%= concept_form f %>
+  <tr>
+    <th><%= f.label :model %> <span class="note">※</span></th>
+    <td>
+      <%- if @item.persisted? -%>
+        <%= @item.module_name(:short) %>
+      <%- else -%>
+        <%= f.select :model, Cms::Lib::Modules.contents, :include_blank => :true %>
+      <%- end -%>
+    </td>
+  </tr>
+  <tr>
+    <th><%= f.label :code %> <span class="note">※</span></th>
+    <td><%= f.text_field :code %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :name %> <span class="note">※</span></th>
+    <td><%= f.text_field :name, :class => 'name' %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :note %></th>
+    <td><%= f.text_field :note %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :sort_no %></th>
+    <td><%= f.text_field :sort_no, :class => 'number' %></td>
+  </tr>
+<% if defined?(container) && container != :tr %>
+</table>
+<% end %>

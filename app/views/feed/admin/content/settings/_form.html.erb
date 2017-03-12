@@ -1,0 +1,20 @@
+<%= render 'shared/admin/content/settings/form', f: f, item: @item -%>
+
+<%= render 'feed/admin/shared/doc_style_tags' %>
+<%= javascript_tag do %>
+$(function() {
+  $('a.show_dialog').on('click', function() {
+    $('#doc_style_tags').dialog({width: 400});
+    return false;
+  });
+});
+<% end %>
+
+<%- if @item.name == 'alist_style' -%>
+<table class="show">
+  <tr>
+    <th>タグ</th>
+    <td><%= select_tag :wrapper_tag, options_for_select(GpArticle::Content::Doc::WRAPPER_TAG_OPTIONS, @item.extra_values[:wrapper_tag]) %></td>
+  </tr>
+</table>
+<%- end -%>

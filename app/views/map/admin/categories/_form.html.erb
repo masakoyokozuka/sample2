@@ -1,0 +1,14 @@
+<table class="show">
+  <tr>
+    <th><%= @item.class.human_attribute_name :name %></th>
+    <td><%= @item.name %></td>
+  </tr>
+  <tr>
+    <th><%= @item.class.human_attribute_name :title %></th>
+    <td><%= @item.title %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :url %></th>
+    <td><%= f.text_field :url, style: 'width: 400px;' %></td>
+  </tr>
+</table>

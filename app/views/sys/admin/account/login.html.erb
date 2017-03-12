@@ -1,0 +1,22 @@
+<%= render 'layout', title: 'ログイン' do -%>
+
+<%= form_tag do -%>
+  <%= hidden_field_tag :uri, @uri %>
+  <div class="box">
+    <%= render 'inner_box' %>
+    <div class="fields">
+      <%- if Sys::Setting.is_maintenance_mode? -%>
+      <div class="alert">現在メンテナンス中です。</div>
+      <div class="alert">期間：<%= Sys::Setting.get_maintenance_start_at %><%= Sys::Setting.get_maintenance_end_at %></div>
+      <%- end -%>
+      <%= text_field_tag :account, nil, placeholder: 'ユーザーID', title: 'ユーザーID' %><br />
+      <%= password_field_tag :password, nil, placeholder: 'パスワード', title: 'パスワード' %>
+    </div>
+    <div class="submitters">
+      <%= image_submit_tag '/_common/themes/admin/images/bt_login.gif', alt: 'ログイン', class: 'login' %>
+    </div>
+    <div class="password_reminder"><%= link_to '>>パスワード変更', new_admin_password_reminder_path %></div>
+  </div>
+<%- end -%>
+
+<%- end -%>

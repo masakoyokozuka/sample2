@@ -1,0 +1,18 @@
+<%= render 'shared/admin/piece/form', f: f do -%>
+<p class="form">詳細設定</p>
+
+<table class="show">
+  <tr>
+    <th><%= @item.locale :num_docs_visibility %></th>
+    <td><%= f.array_select 'in_settings[num_docs_visibility]', @item.class::NUM_DOCS_VISIBILITY_OPTIONS %></td>
+  </tr>
+  <tr>
+    <th><%= @item.locale :term %></th>
+    <td><%= f.array_select 'in_settings[term]', @item.class::TERM_OPTIONS %></td>
+  </tr>
+  <tr>
+    <th><%= @item.locale :order %></th>
+    <td><%= f.array_select 'in_settings[order]', @item.class::ORDER_OPTIONS %></td>
+  </tr>
+</table>
+<%- end -%>

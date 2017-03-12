@@ -1,0 +1,117 @@
+ja:
+  activerecord:
+    models:
+      gp_article/content/doc: 記事コンテンツ
+      gp_article/doc: 記事
+      gp_article/category_type: カテゴリ種別
+      gp_article/category: カテゴリ
+      gp_article/tag: 関連ワード
+      gp_article/comment: コメント
+    attributes:
+      gp_article/doc:
+        id: 記事ID
+        serial_no: 記事番号
+        name: ディレクトリ名
+        filename_base: ファイル名
+        public_full_uri: 記事URL
+        title: タイトル
+        body: 内容
+        body_more: 追記
+        updated_at: 更新日時
+        href: リンクURL
+        subtitle: サブタイトル
+        summary: 概要
+        list_image: 画像（添付ファイル名）
+        state: 状態
+        event_state: イベントカレンダー表示
+        event_will_sync: イベント同期
+        event_started_on: イベント開始日
+        event_ended_on: イベント終了日
+        event_note: 備考
+        raw_tags: 関連ワード
+        mobile_title: 携帯用タイトル
+        mobile_body: 携帯用内容
+        terminal_pc_or_smart_phone: PC・スマートフォン
+        terminal_mobile: 携帯
+        editable_groups: 編集可能グループ
+        in_rel_doc_ids: 関連記事
+        marker_state: マップ表示
+        meta_description: 説明文
+        meta_keywords: キーワード
+        og_type: タイプ
+        og_title: タイトル
+        og_description: 説明
+        og_image: 画像（添付ファイル名）
+        template_id: テンプレート
+        body_more_link_text: 追記リンク表記
+        feature_1: 記事一覧表示
+        feature_2: 記事表示
+        marker_icon_category_id: マーカーアイコン用カテゴリ
+        display_published_at: 公開日
+        display_updated_at: 最終更新日
+        keep_display_updated_at: 自動更新しない
+        qrcode_state: QRコード
+        lang: 言語
+        inquiries/group_id: 連絡先（課）
+        inquiries/charge: 連絡先（室・担当）
+        inquiries/address: 連絡先（住所）
+        inquiries/tel: 連絡先（電話番号）
+        inquiries/fax: 連絡先（ファクシミリ）
+        inquiries/email: 連絡先（メールアドレス）
+        inquiries/note: 連絡先（備考）
+      gp_article/doc/maps/markers:
+        lat: 緯度
+        lng: 経度
+      gp_article/content/setting/doc_list_pagination:
+        doc_list_number: 一覧表示件数
+        doc_publish_more_pages: 静的ページ数
+      gp_article/category_type:
+        name: カテゴリ種別ID
+        title: カテゴリ種別名
+        sort_no: 並び順
+        updated_at: 更新日時
+        state: 状態
+      gp_article/category:
+        name: カテゴリID
+        title: カテゴリ名
+        sort_no: 並び順
+        updated_at: 更新日時
+        state: 状態
+      gp_article/piece/recent_tab:
+        list_count: 表示件数
+        list_style: 表示形式
+        date_style: 日付形式
+        more_label: 一覧リンク文字
+        name: タブID
+        title: タブ名
+        more: 一覧リンク
+        condition: 結合
+        sort_no: 並び順
+      gp_article/piece/doc:
+        docs_number: 表示件数
+        docs_order: 記事表示順
+        doc_style: 記事表示形式
+        date_style: 日付形式
+        more_link_body: 一覧リンク文字
+        more_link_url: 一覧リンクURL
+      gp_article/piece/monthly_archive:
+        num_docs_visibility: 記事数表示
+      gp_article/piece/archive:
+        num_docs_visibility: 記事数表示
+        term: 表示形式
+        order: 表示順
+      gp_article/piece/comment:
+        docs_number: 表示件数
+        authors_visibility: 投稿者表示
+      gp_article/piece/search_doc:
+        in_category_type_ids: カテゴリ種別
+      gp_article/comment:
+        body: 内容
+        author_name: 投稿者名
+        author_email: 投稿者メールアドレス
+        author_url: 投稿者URL
+        posted_at: 受付日時
+        updated_at: 更新日時
+        state: 状態
+        remote_addr: IPアドレス
+        user_agent: ユーザーエージェント

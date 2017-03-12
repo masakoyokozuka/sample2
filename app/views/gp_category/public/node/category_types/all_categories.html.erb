@@ -1,0 +1,13 @@
+<div class="contentGpCategoryCategoryType">
+  <%- @category_type.preload_assocs(:public_root_categories_and_public_descendants_and_public_node_ancestors_assocs) -%>
+  <%- @category_type.public_root_categories.each do |category| -%>
+  <section class="categoryType categoryType<%= @category_type.name.try(:camelize) %>">
+    <h2><%= link_to category.title, category.public_uri %></h2>
+    <%- unless category.public_children.empty? -%>
+    <ul class="children">
+      <%= render 'all_categories_categories', categories: category.public_children %>
+    </ul>
+    <%- end -%>
+  </section>
+  <%- end -%>
+</div>

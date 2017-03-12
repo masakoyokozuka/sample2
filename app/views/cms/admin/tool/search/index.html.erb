@@ -1,0 +1,56 @@
+<p class="form">検索</p>
+<%= form_for :item, :html => {:method => :post} do |f| %>
+<%= hidden_field_tag :do, 'search' %>
+<table>
+  <tr>
+    <th>検索対象</th>
+    <td colspan="2">
+      <%= check_box_tag 'target[gp_article]', true, false, {checked: params[:target].present? ? params[:target][:gp_article].present? : true }%>
+      <label for="target_gp_article">記事コンテンツ</label>
+      <%- if Core.user.has_auth?(:designer) -%>
+      <%= check_box_tag 'target[node_page]', true, false, {checked: params[:target].present? ? params[:target][:node_page].present? : true }%>
+      <label for="target_node_page">固定ページ</label>
+      <%= check_box_tag 'target[piece]', true, false, {checked: params[:target].present? ? params[:target][:piece].present? : true }%>
+      <label for="target_piece">ピース</label>
+      <%= check_box_tag 'target[layout]', true, false, {checked: params[:target].present? ? params[:target][:layout].present? : true }%>
+      <label for="target_layout">レイアウト</label>
+      <%- end -%>
+      <%= check_box_tag 'target[data_text]', true, false, {checked: params[:target].present? ? params[:target][:data_text].present? : true }%>
+      <label for="target_data_text">テキスト</label>
+      <%= check_box_tag 'target[data_file]', true, false, {checked: params[:target].present? ? params[:target][:data_file].present? : true }%>
+      <label for="target_data_file">ファイル</label>
+    </td>
+  </tr>
+  <tr>
+    <th>キーワード</th>
+    <td><%= f.text_field :keyword, :style => "width: 400px;" %></td>
+    <td class="submitters">
+      <%= submit_tag '検索'    , :name => :search %>
+      <%= submit_tag 'リセット', :name => :reset %>
+    </td>
+  </tr>
+</table>
+<% end %>
+
+<% if @items.size > 0 %>
+  <br />
+  <p class="form">検索結果</p>
+<% end %>
+
+<% @items.each do |group| %>
+<p style="margin: 10px 0px; padding: 2px 5px; border-left: 4px solid #bbb;"><%= group[0] %></p>
+<table class="index">
+  <tr>
+    <th style="width: 70px; text-align: right;">ID</th>
+    <th>タイトル</th>
+  </tr>
+  <% group[1].each do |c| %>
+  <tr>
+    <td style="text-align: right;"><%= c[0] %></td>
+    <td><%= link_to c[1], c[2] %></td>
+  </tr>
+  <% end %>
+  <% if group[1].size == 0 %><tr><td style="text-align: right;">-</td><td>見つかりませんでした。</td></tr><% end %>
+</table>
+<% end %>
+

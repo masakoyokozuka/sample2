@@ -1,0 +1,18 @@
+<%
+layouts = []
+if concept = safe{@node.inherited_concept} || safe{@parent.inherited_concept}
+  concept.ancestors.each { |c| layouts += c.layouts }
+  layouts = layouts.map { |l| [l.concept_name_and_title, l.id] }
+else
+  #layouts << ['// コンセプトが設定されていません', nil]
+end
+
+%><table class="show">
+  <tr>
+    <th><%= @item.locale :value %></th>
+    <td><%= f.select :value, layouts, include_blank: '　　　　' %></td>
+  </tr><tr>
+    <th><%= @item.locale :sort_no %></th>
+    <td><%= f.text_field :sort_no, class: 'number' %></td>
+  </tr>
+</table>

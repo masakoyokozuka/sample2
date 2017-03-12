@@ -1,0 +1,8 @@
+<h2><%= menu_header @content.name, Rank::Rank.model_name.human %></h2>
+
+<div class="actionMenu">
+  <%- if params[:action] == 'index' -%>
+  <%= link_to 'PV', {target: :pageviews}, class: ('current' if @target == 'pageviews') %>
+  <%= link_to '訪問者', {target: :visitors}, class: ('current' if @target == 'visitors') %>
+  <%- end -%>
+</div>

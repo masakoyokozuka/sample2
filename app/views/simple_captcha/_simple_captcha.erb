@@ -1,0 +1,32 @@
+<div class="captchaForm" id="captchaForm">
+  <div class="image"><%= simple_captcha_options[:image] %></div>
+  <div class="reload"><%= link_to '更新', '#', id: 'captchaReload' %></div>
+  <div class="talk"><%= link_to 'よみあげる', '#', id: 'captchaTalk' %></div>
+  <div class="player" id="captchaTalkPlayer"></div>
+  <div class="field"><%= simple_captcha_options[:field] %></div>
+  <div class="label"><%= simple_captcha_options[:label] %></div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $('#captchaReload').on('click', function(e) {
+    $('#captchaForm').parent().load('/_tools/captcha/index');
+    $('#captchaTalk').text('よみあげる');
+    $('#captchaTalkPlayer').html('');
+    return false;
+  });
+  $('#captchaTalk').on('click', function(e) {
+    var player = $('#captchaTalkPlayer');
+    if (player.html() == '') {
+      var uri = '/_tools/captcha/talk?key=' + $('input[name="captcha_key"]').val() + '&time=' + (new Date).getTime();
+      var html = '<audio src=" ' + uri + '" controls autoplay />';
+      player.html(html);
+      $('#captchaTalk').text('よみあげ中');
+    } else {
+      player.html('');
+      $('#captchaTalk').text('よみあげる');
+    }
+    return false;
+  });
+});
+</script>

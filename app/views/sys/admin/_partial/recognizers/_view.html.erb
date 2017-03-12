@@ -1,0 +1,17 @@
+<%- return '' if item.recognizers.empty? -%>
+<table class="show">
+  <tr>
+    <th>承認者</th>
+    <td>
+      <%- item.recognition.to_a.each do |r| -%>
+        <%= r[:user].try(:name_with_account) %> ：
+        <%- if item.state == 'draft' -%>
+          未依頼
+        <%- else -%>
+          <%= r[:recognized_at].blank? ? '未承認' : "承認日時 #{r[:recognized_at]}" %>
+        <%- end -%>
+        <br />
+      <%- end -%>
+    </td>
+  </tr>
+</table>

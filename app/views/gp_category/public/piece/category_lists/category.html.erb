@@ -1,0 +1,16 @@
+<%- @category.preload_assocs(:public_descendants_and_public_node_ancestors_assocs) -%>
+<%- if @category.public_children.present? -%>
+<div class="level<%= @category.level_no + 1 -%>">
+  <%- @category.public_children.each do |child| -%>
+  <section class="category <%= child.name -%><%= cycle '', ' cycle' %>">
+    <h3><%= link_to child.title, child.public_uri %></h3>
+
+    <%- if child.public_children.present? && @piece.layer == 'descendants' -%>
+    <ul class="level<%= child.level_no + 1 -%>">
+    <%= render 'categories', categories: child.public_children %>
+    </ul>
+    <%- end -%>
+  </section>
+  <%- end -%>
+</div>
+<%- end -%>

@@ -1,0 +1,57 @@
+<%- if @piece.in_settings[:twitter] -%>
+<span class="twitter-wrapper">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</span>
+<%- end -%>
+
+<%- if @piece.in_settings[:g_plusone] -%>
+<span class="g-wrapper">
+  <!-- Place this tag where you want the +1 button to render. -->
+  <div class="g-plusone" data-size="medium"></div>
+
+  <!-- Place this tag after the last +1 button tag. -->
+  <script type="text/javascript">
+    window.___gcfg = {lang: 'ja'};
+
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+  </script>
+</span>
+<%- end -%>
+
+<%- if @piece.in_settings[:fb_like] -%>
+<div class="fb-wrapper">
+  <div class="fb-like" data-width="450" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+</div>
+<%- end -%>
+
+<%- if @piece.in_settings[:mixi] -%>
+<div class="mixi-wrapper">
+<a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="<%= @piece.in_settings[:mixi_data_key] %>" data-button="button-6">mixiチェック</a>
+<script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
+</div>
+<%- end -%>
+
+<%- if Page.smart_phone? %>
+<%- if @piece.in_settings[:line] -%>
+<div class="line-wrapper">
+<script type="text/javascript" src="http://media.line.naver.jp/js/line-button.js?v=20130508" ></script>
+<script type="text/javascript">
+new jp.naver.line.media.LineButton({"pc":true,"lang":"ja","type":"a"});
+</script>
+</div>
+<%- end -%>
+<%- end -%>
+

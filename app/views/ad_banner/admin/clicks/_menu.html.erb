@@ -1,0 +1,5 @@
+<h2><%= menu_header @content.name, @banner.advertiser_name, AdBanner::Click.model_name.human %></h2>
+
+<div class="actionMenu">
+  <%= link_to '戻る', ad_banner_banner_path(content: @content, id: @banner.id) %>
+</div>

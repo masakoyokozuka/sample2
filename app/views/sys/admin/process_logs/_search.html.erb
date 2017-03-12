@@ -1,0 +1,25 @@
+<%= form_tag url_for(action: :index), method: :get, class: 'search' do |f| %>
+<table>
+  <tr>
+    <th><%= Sys::Process.human_attribute_name :title %></th>
+    <td>
+      <%= select_tag "s_name", options_for_select(Sys::Process::ALL_PROCESSES, params[:s_name]), { id: nil, include_blank: true } %>
+    </td>
+    <th>期間</th>
+    <td>
+      <%= text_field_tag :start_date, params[:start_date], class: "datepicker" %>
+      ～ <%= text_field_tag :close_date, params[:close_date], class: "datepicker" %>
+    </td>
+    <td class="submitters">
+      <%= submit_tag '検索', name: :search %>
+      <%= submit_tag 'リセット', name: :reset %>
+    </td>
+  </tr>
+</table>
+<!-- end .search --><% end %>
+
+<%= javascript_tag do -%>
+$(document).ready(function () {
+  <%= enable_datepicker_script -%>
+});
+<%- end -%>
